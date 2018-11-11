@@ -20,6 +20,8 @@ public class MainClass {
         SignInPageWithPassword signinpagewithpassword = new SignInPageWithPassword(driver);
         signinpagewithpassword.lastSteptypeCredits("R3t866mu302");
 
+        driver.quit();
+
 
 
 
