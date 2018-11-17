@@ -5,10 +5,11 @@ import org.openqa.selenium.WebDriver;
 public class SignInPage {
 
 
-    WebDriver driver;
+    WebDriver wd;
+
 
     public SignInPage(WebDriver driver) {
-        this.driver = driver;
+        this.wd = driver;
     }
 
     private By inputEmailField = By.xpath(".//*[@id='identifierId']");
@@ -16,19 +17,19 @@ public class SignInPage {
     private By nextButton = By.xpath("//div[@id='identifierNext']");
 
     public SignInPage typeEmail(String email){
-        driver.findElement(inputEmailField).sendKeys(email);
+        wd.findElement(inputEmailField).sendKeys(email);
         return this;
     }
 
     public SignInPageWithPassword clickNextButton(){
-        driver.findElement(nextButton).click();
-        return new SignInPageWithPassword(driver);
+        wd.findElement(nextButton).click();
+        return new SignInPageWithPassword(wd);
     }
 
    public SignInPageWithPassword typeCredits(String email){
         this.typeEmail(email);
         this.clickNextButton();
-        return new SignInPageWithPassword(driver);
+        return new SignInPageWithPassword(wd);
     }
 
 

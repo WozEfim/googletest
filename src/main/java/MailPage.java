@@ -2,10 +2,10 @@ import org.openqa.selenium.WebDriver;
 
 public class MailPage {
 
-    WebDriver driver;
+    WebDriver wd;
 
     public MailPage(WebDriver driver) {
-        this.driver = driver;
+        this.wd = driver;
     }
 
 
