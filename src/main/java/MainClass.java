@@ -9,11 +9,11 @@ public class MainClass {
 
 
     public static void main(String[] args) {
-        // for MacOs geckodriver
-        //System.setProperty("webdriver.gecko.driver", "/Users/efim/chromedr/geckodriver");
+        //for MacOs geckodriver
+        System.setProperty("webdriver.chrome.driver", "/Users/efim/chromedr/chromedriver");
 
         // for Win10 geckodriver
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\qa\\chromedriver\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\qa\\chromedriver\\chromedriver.exe");
 
 
         driver = new ChromeDriver();
