@@ -33,7 +33,7 @@ public class MainClass {
         MailPage mailpage = new MailPage(driver);
         mailpage.clickToCheckbox();
         mailpage.deleteMessages();
-        mailpage.verifyMessages();
+
 
 
 
