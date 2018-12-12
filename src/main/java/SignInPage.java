@@ -5,35 +5,32 @@ import org.openqa.selenium.WebDriver;
 public class SignInPage {
 
 
-    WebDriver wd;
+    WebDriver driver;
 
 
     public SignInPage(WebDriver driver) {
-        this.wd = driver;
+        this.driver = driver;
     }
 
     private By inputEmailField = By.xpath(".//*[@id='identifierId']");
 
     private By nextButton = By.xpath("//div[@id='identifierNext']");
 
-    public SignInPage typeEmail(String email){
-        wd.findElement(inputEmailField).sendKeys(email);
+    public SignInPage typeEmail(String email) {
+        driver.findElement(inputEmailField).sendKeys(email);
         return this;
     }
 
-    public SignInPageWithPassword clickNextButton(){
-        wd.findElement(nextButton).click();
-        return new SignInPageWithPassword(wd);
+    public SignInPageWithPassword clickNextButton() {
+        driver.findElement(nextButton).click();
+        return new SignInPageWithPassword(driver);
     }
 
-   public SignInPageWithPassword typeCredits(String email){
+    public SignInPageWithPassword typeCredits(String email) {
         this.typeEmail(email);
         this.clickNextButton();
-        return new SignInPageWithPassword(wd);
+        return new SignInPageWithPassword(driver);
     }
-
-
-
 
 
 }

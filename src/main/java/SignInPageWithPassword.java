@@ -4,38 +4,36 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-
 public class SignInPageWithPassword {
 
-    WebDriver wd;
+    WebDriver driver;
 
 
     public SignInPageWithPassword(WebDriver driver) {
-        this.wd = driver;
+        this.driver = driver;
     }
-
 
 
     private By passwordField = By.cssSelector("input[type=password]");
 
     private By nextButtonPasswordPage = By.xpath("//div[@id='passwordNext']");
 
-    public SignInPageWithPassword typePasswordField(String password){
-        WebDriverWait wait = new WebDriverWait(wd, 10);
+    public void typePasswordField(String password) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type=password]")));
-        wd.findElement(passwordField).sendKeys(password);
-        return this;
+        driver.findElement(passwordField).sendKeys(password);
+
 
     }
 
-    public MailPage clickNextButtonWithPassword(){
-        wd.findElement(nextButtonPasswordPage).click();
-        return new MailPage(wd);
+    public MailPage clickNextButtonWithPassword() {
+        driver.findElement(nextButtonPasswordPage).click();
+        return new MailPage(driver);
     }
 
-    public MailPage lastSteptypeCredits(String password){
+    public MailPage lastSteptypeCredits(String password) {
         this.typePasswordField(password);
         this.clickNextButtonWithPassword();
-        return new MailPage(wd);
+        return new MailPage(driver);
     }
 }
