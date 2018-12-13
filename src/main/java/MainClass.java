@@ -10,10 +10,10 @@ public class MainClass {
 
     public static void main(String[] args) {
         //for MacOs geckodriver
-        System.setProperty("webdriver.chrome.driver", "/Users/efim/chromedr/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "/Users/efim/chromedr/chromedriver");
 
-        // for Win10 geckodriver
-        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\qa\\chromedriver\\chromedriver.exe");
+        //for Win10 geckodriver
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\qa\\chromedriver\\chromedriver.exe");
 
 
         driver = new ChromeDriver();
@@ -24,20 +24,14 @@ public class MainClass {
 
 
         SignInPage signinpage = new SignInPage(driver);
-        signinpage.typeCredits("woz.efim");
+        SignInPageWithPassword signInPageWithPassword = signinpage.typeCredits("woz.efim");
+        signInPageWithPassword.lastSteptypeCredits("R3t866mu302");
 
-
-        SignInPageWithPassword signinpagewithpassword = new SignInPageWithPassword(driver);
-        signinpagewithpassword.lastSteptypeCredits("R3t866mu302");
 
         MailPage mailpage = new MailPage(driver);
         mailpage.clickToCheckbox();
         mailpage.deleteMessages();
         mailpage.verifyNewMessages();
-
-
-
-
 
 
     }

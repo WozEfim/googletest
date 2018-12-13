@@ -2,8 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 public class MailPage {
@@ -15,7 +17,8 @@ public class MailPage {
     }
 
     // поместил вебелементы писем на странице с сообщениями
-    public List<WebElement> listMessages() {
+
+    private List<WebElement> listMessages() {
         return driver.findElements(By.xpath(".//tr[@jsaction='bjyjJe:NOSeAe;pInidd:NOSeAe;']"));
 
 
@@ -24,11 +27,15 @@ public class MailPage {
     // прошелся по каждому сообщению кликнув на чекбокс выделенния
     public void clickToCheckbox() {
         List<WebElement> messages = listMessages();
+        if (messages.size() == 0){
+            System.exit(0);// normal termination
+        }
+        else{
         for (WebElement element : messages) {
             WebElement checkbox = element.findElement(By.xpath(".//div[@dir='ltr' and @role='checkbox']"));
-            ////div[@class='oZ-jc T-Jo J-J5-Ji '] - checkbox xpath v1
-            //.//div[@dir='ltr' and @role='checkbox']
-            checkbox.click();
+            // //div[@class='oZ-jc T-Jo J-J5-Ji '] - checkbox xpath v1
+            // .//div[@dir='ltr' and @role='checkbox']
+            checkbox.click();}
 
         }
 
@@ -41,9 +48,11 @@ public class MailPage {
         deleteicon.click();
     }
 
-    public void verifyNewMessages(){
+    //проверил наличие новых сообщений , если есть повторяю методы поиска и удаления.
+
+    public void verifyNewMessages() {
         List<WebElement> newmessages = listMessages();
-        while (newmessages.size() != 0){
+        while (newmessages.size() != 0) {
             retryingFindClick();
             //clickToCheckbox();
             deleteMessages();
@@ -53,18 +62,21 @@ public class MailPage {
     public boolean retryingFindClick() {
         boolean result = false;
         int attempts = 0;
-        while(attempts < 2) {
+        while (attempts < 2) {
             try {
                 driver.findElement(By.xpath(".//div[@dir='ltr' and @role='checkbox']")).click();
                 result = true;
                 break;
-            } catch(StaleElementReferenceException e) {
+            } catch (StaleElementReferenceException e) {
+            } catch (NoSuchElementException e) {
+                System.out.println("Mailbox is empty");
             }
             attempts++;
-        }
-        return result;
-    }
 
+
+        }
+       return result;
+    }
 
 
 }
