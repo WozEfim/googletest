@@ -1,6 +1,5 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.concurrent.TimeUnit;
 
 
@@ -25,14 +24,15 @@ public class MainClass {
 
         SignInPage signinpage = new SignInPage(driver);
         SignInPageWithPassword signInPageWithPassword = signinpage.typeCredits("woz.efim");
-        signInPageWithPassword.lastSteptypeCredits("R3t866mu302");
+        MailPage mailpage  = signInPageWithPassword.lastSteptypeCredits("R3t866mu302");
 
 
-        MailPage mailpage = new MailPage(driver);
-        mailpage.clickToCheckbox();
-        mailpage.deleteMessages();
-        mailpage.verifyNewMessages();
+        if (mailpage.isMailExists()) {
+            mailpage.clickToCheckbox();
+            mailpage.deleteMessages();
+            mailpage.verifyNewMessages();
 
 
+        }
     }
 }

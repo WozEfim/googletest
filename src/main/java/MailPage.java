@@ -2,10 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 
 public class MailPage {
@@ -19,28 +17,30 @@ public class MailPage {
     // поместил вебелементы писем на странице с сообщениями
 
     private List<WebElement> listMessages() {
-        return driver.findElements(By.xpath(".//tr[@jsaction='bjyjJe:NOSeAe;pInidd:NOSeAe;']"));
+           return driver.findElements(By.xpath(".//tr[@jsaction='bjyjJe:NOSeAe;pInidd:NOSeAe;']"));
 
 
     }
+    public boolean isMailExists(){
+        return listMessages().size() > 0;
+    }
+
 
     // прошелся по каждому сообщению кликнув на чекбокс выделенния
     public void clickToCheckbox() {
         List<WebElement> messages = listMessages();
-        if (messages.size() == 0){
-            System.exit(0);// normal termination
-        }
-        else{
-        for (WebElement element : messages) {
-            WebElement checkbox = element.findElement(By.xpath(".//div[@dir='ltr' and @role='checkbox']"));
-            // //div[@class='oZ-jc T-Jo J-J5-Ji '] - checkbox xpath v1
-            // .//div[@dir='ltr' and @role='checkbox']
-            checkbox.click();}
+
+                for (WebElement element : messages) {
+                WebElement checkbox = element.findElement(By.xpath(".//div[@dir='ltr' and @role='checkbox']"));
+                // //div[@class='oZ-jc T-Jo J-J5-Ji '] - checkbox xpath v1
+                // .//div[@dir='ltr' and @role='checkbox']
+                checkbox.click();
+            }
 
         }
 
 
-    }
+
 
     // удалил ранее выделенные сообщения
     public void deleteMessages() {
@@ -49,7 +49,6 @@ public class MailPage {
     }
 
     //проверил наличие новых сообщений , если есть повторяю методы поиска и удаления.
-
     public void verifyNewMessages() {
         List<WebElement> newmessages = listMessages();
         while (newmessages.size() != 0) {
@@ -59,6 +58,7 @@ public class MailPage {
         }
     }
 
+    // попытка повторно найти элемент
     public boolean retryingFindClick() {
         boolean result = false;
         int attempts = 0;
@@ -68,14 +68,10 @@ public class MailPage {
                 result = true;
                 break;
             } catch (StaleElementReferenceException e) {
-            } catch (NoSuchElementException e) {
-                System.out.println("Mailbox is empty");
             }
             attempts++;
-
-
         }
-       return result;
+        return result;
     }
 
 
